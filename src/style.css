@@ -1,5 +1,7 @@
 /* ---------- RESET ---------- */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
 }
 
@@ -12,23 +14,196 @@ body {
     line-height: 1.5;
 }
 
-h1, h2, h3, h4,
-button, input, label {
-  line-height: 1.1;
+h1,
+h2,
+h3,
+h4,
+button,
+input,
+label {
+    line-height: 1.1;
 }
 
 
-/* ---------- FONT ---------- */
+
+/* ---------- ELEMENTS ---------- */
 body {
-    font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"
+    font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
+        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
-/* ---------- VARIABLES ---------- */
+button {
+    font-family: inherit;
+    background-color: transparent;
+}
 
+button:hover {
+    cursor: pointer;
+}
 
 
 
 /* ---------- PROJECT ---------- */
-/* ---- LAYOUT HEADING ---- */
-/* -- heading -- */
-/* this is a comment */
+/* ---- Body ---- */
+body {
+    background: linear-gradient(
+        to bottom right,
+        rgba(174, 202, 255, 0.939),
+        rgba(255, 132, 0, 0.431)
+    );
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 100px 1fr;
+    grid-template-areas:
+        "title title"
+        "board-1 board-2";
+    justify-items: center;
+}
+/* ---- Dialog ---- */
+dialog {
+    justify-self: center;
+    top: 100px;
+    border-style: none;
+    background: transparent;
+    padding: 0;
+}
+
+dialog::backdrop {
+    opacity: 0%;
+}
+
+dialog .square {
+    pointer-events: none;
+}
+
+.dialog__board .message {
+    background-color: rgba(255, 0, 117, 0.3);
+}
+
+.dialog__button-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.dialog__button-random,
+.dialog__button-accept {
+    justify-self: center;
+
+    font-weight: 600;
+    background-color: "#fff";
+
+    width: 120px;
+    margin: 20px 10px 0 10px;
+    padding: 10px;
+    border: 0.5px solid grey;
+    border-radius: 7px;
+    outline: none;
+}
+.dialog__button-random:hover,
+.dialog__button-accept:hover {
+    color: white;
+    background-color: grey;
+}
+
+
+/* ---- Title ---- */
+.title {
+    grid-area: title;
+    font-size: 3rem;
+    align-self: center;
+    font-weight: 700;
+    user-select: none;
+}
+
+
+/* ---- Boards ---- */
+.board-player {
+    grid-area: board-1;
+    justify-self: end;
+
+    margin-right: 40px;
+    pointer-events: none;
+}
+
+.board-computer {
+    grid-area: board-2;
+    justify-self: start;
+
+    margin-left: 40px;
+}
+
+.board-player,
+.board-computer,
+.dialog__board {
+    display: grid;
+    grid-template-rows: 40px repeat(10, 38px);
+}
+
+.not-current-turn {
+    opacity: 0.35;
+    pointer-events: none;
+}
+
+.message-container {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.message {
+    font-family: "Courier New", Courier, monospace;
+    color: black;
+    font-weight: 700;
+    user-select: none;
+    align-self: center;
+    border-radius: 7px;
+    padding: 0 15px;
+}
+
+.board-player .message {
+    background-color: rgba(32, 255, 0, 0.41);
+}
+
+.board-computer .message {
+    background-color: rgba(204, 255, 0, 0.41);
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.square:hover {
+    border-radius: 7px;
+    background-color: rgba(28, 119, 222, 0.569);
+    cursor: pointer;
+}
+
+.square {
+    background-color: rgba(255, 255, 255, 0.763);
+    margin: 1px;
+    height: 36px;
+    width: 36px;
+
+    &.ship {
+        background-color: rgba(128, 128, 128, 0.675);
+        border-radius: 7px;
+        pointer-events: none;
+    }
+
+    &.ship-hit {
+        border: rgba(255, 0, 111, 0.753) 5px solid;
+        background-color: rgba(128, 128, 128, 0.675);
+        border-radius: 7px;
+        pointer-events: none;
+    }
+
+    &.water-hit {
+        background-color: transparent;
+        pointer-events: none;
+    }
+}
+
+.square:active {
+    background-color: rgba(28, 119, 222, 0.916);
+}
